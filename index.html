@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UploadYuk</title>
+    <link rel="icon" href="https://files.catbox.moe/iy2wmt.png" type="image/png">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- FontAwesome Icons -->
+
+    <style>
+        /* Styling Halaman */
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* Kotak Utama */
+        .container {
+            max-width: 380px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Tombol Upload */
+        .upload-btn {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            transition: 0.3s ease-in-out;
+            font-weight: 500;
+        }
+
+        .upload-btn:hover {
+            background: linear-gradient(135deg, #0056b3, #004099);
+            transform: scale(1.05);
+        }
+
+        /* Input URL */
+        #fileUrl {
+            display: none;
+            margin-top: 15px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Tombol Salin */
+        .copy-btn {
+            background: none;
+            color: #007bff;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        .copy-btn:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>🚀 UploadYuk - Simpel & Cepat!</h2>
+    <p>Unggah gambar kamu dalam hitungan detik.</p>
+
+    <div class="container">
+        <input type="file" id="fileInput" style="display: none;" accept="image/*">
+        
+        <button class="upload-btn" onclick="document.getElementById('fileInput').click();">
+            <i class="fas fa-cloud-upload-alt"></i> Pilih Gambar
+        </button>
+
+        <div id="fileUrl">
+            <p>✅ Gambar berhasil diunggah!</p>
+            <input type="text" id="uploadedUrl" readonly onclick="copyToClipboard()">
+            <button class="copy-btn" onclick="copyToClipboard()">
+                <i class="fas fa-copy"></i> Salin URL
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("fileInput").addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append("file", file);
+
+            fetch("/upload", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.filePath) {
+                    const fileUrl = window.location.origin + data.filePath;
+                    document.getElementById("uploadedUrl").value = fileUrl;
+                    document.getElementById("fileUrl").style.display = "block";
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        });
+
+        function copyToClipboard() {
+            const urlField = document.getElementById("uploadedUrl");
+            urlField.select();
+            document.execCommand("copy");
+        }
+    </script>
+
+</body>
+</html>
