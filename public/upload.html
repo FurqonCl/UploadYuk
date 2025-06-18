@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UPLOAD YUK</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease-out both;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .neon-text {
+      text-shadow: 0 0 5px #0ea5e9, 0 0 10px #0ea5e9, 0 0 20px #0ea5e9;
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364] min-h-screen flex flex-col items-center justify-center p-4">
+
+  <div class="glass p-6 sm:p-8 rounded-3xl shadow-2xl max-w-md w-full text-white text-center fade-in-up">
+    <h1 class="text-4xl font-extrabold neon-text mb-6 tracking-wide">UPLOAD YUK</h1>
+
+    <form id="uploadForm" class="space-y-5" enctype="multipart/form-data" method="POST" action="/upload">
+      <label class="block text-left text-sm mb-1">Pilih File:</label>
+      <input 
+        type="file" 
+        name="file" 
+        required 
+        class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+      />
+
+      <button 
+        type="submit" 
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300"
+      >
+        Upload File
+      </button>
+    </form>
+
+    <div id="result" class="mt-4 text-sm text-blue-300"></div>
+  </div>
+
+  <div id="uploadedFiles" class="mt-10 w-full max-w-md text-white text-center fade-in-up">
+    <h2 class="text-2xl font-semibold mb-4">Uploaded Files</h2>
+    <ul id="fileList" class="text-sm space-y-1"></ul>
+  </div>
+
+  <script>
+    const form = document.getElementById('uploadForm');
+    const result = document.getElementById('result');
+    const fileList = document.getElementById('fileList');
+
+    async function loadUploadedFiles() {
+      const res = await fetch('/files');
+      const files = await res.json();
+      fileList.innerHTML = '';
+      files.reverse().forEach(file => {
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="${file.url_page}" target="_blank" class="text-blue-400 underline hover:text-blue-300 transition">${file.originalname}</a>`;
+        fileList.appendChild(li);
+      });
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      result.textContent = 'Uploading...';
+
+      try {
+        const res = await fetch('/upload', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          result.innerHTML = `File uploaded! <a href="${data.url_page}" target="_blank" class="underline text-blue-300">Lihat File</a>`;
+          loadUploadedFiles();
+        } else {
+          result.textContent = data.error || 'Upload failed.';
+        }
+      } catch (err) {
+        result.textContent = 'Terjadi kesalahan saat mengupload file.';
+      }
+    });
+
+    loadUploadedFiles();
+  </script>
+</body>
+</html>
