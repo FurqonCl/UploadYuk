@@ -1,0 +1,74 @@
+[
+  {
+    "filename": "1746784770939-icon.png",
+    "originalname": "icon.png",
+    "size": 1434797,
+    "type": "image/png",
+    "uploaded_at": "2025-05-09T09:59:31.198Z",
+    "url_direct": "http://localhost:3000/uploads/1746784770939-icon.png",
+    "url_page": "http://localhost:3000/file/1746784770939-icon.png"
+  },
+  {
+    "filename": "1746784791803-settings.json",
+    "originalname": "settings.json",
+    "size": 1835,
+    "type": "application/json",
+    "uploaded_at": "2025-05-09T09:59:51.858Z",
+    "url_direct": "http://localhost:3000/uploads/1746784791803-settings.json",
+    "url_page": "http://localhost:3000/file/1746784791803-settings.json"
+  },
+  {
+    "filename": "1746784805316-settings.json",
+    "originalname": "settings.json",
+    "size": 1835,
+    "type": "application/json",
+    "uploaded_at": "2025-05-09T10:00:05.445Z",
+    "url_direct": "http://localhost:3000/uploads/1746784805316-settings.json",
+    "url_page": "http://localhost:3000/file/1746784805316-settings.json"
+  },
+  {
+    "filename": "1746800267555-icon.png",
+    "originalname": "icon.png",
+    "size": 1434797,
+    "type": "image/png",
+    "uploaded_at": "2025-05-09T14:17:47.743Z",
+    "url_direct": "http://localhost:3000/uploads/1746800267555-icon.png",
+    "url_page": "http://localhost:3000/file/1746800267555-icon.png"
+  },
+  {
+    "filename": "1746802066618-icon.png",
+    "originalname": "icon.png",
+    "size": 1434797,
+    "type": "image/png",
+    "uploaded_at": "2025-05-09T14:47:46.803Z",
+    "url_direct": "http://localhost:3000/uploads/1746802066618-icon.png",
+    "url_page": "http://localhost:3000/file/1746802066618-icon.png"
+  },
+  {
+    "filename": "1746839805900-settings.json",
+    "originalname": "settings.json",
+    "size": 1835,
+    "type": "application/json",
+    "uploaded_at": "2025-05-10T01:16:45.952Z",
+    "url_direct": "http://localhost:3000/uploads/1746839805900-settings.json",
+    "url_page": "http://localhost:3000/file/1746839805900-settings.json"
+  },
+  {
+    "filename": "1746884067200-download (1).png",
+    "originalname": "download (1).png",
+    "size": 3198,
+    "type": "image/png",
+    "uploaded_at": "2025-05-10T13:34:27.260Z",
+    "url_direct": "http://localhost:3000/uploads/1746884067200-download (1).png",
+    "url_page": "http://localhost:3000/file/1746884067200-download (1).png"
+  },
+  {
+    "filename": "1746884118488-SCRAPER VIP .zip",
+    "originalname": "SCRAPER VIP .zip",
+    "size": 11861,
+    "type": "application/zip",
+    "uploaded_at": "2025-05-10T13:35:18.536Z",
+    "url_direct": "http://localhost:3000/uploads/1746884118488-SCRAPER VIP .zip",
+    "url_page": "http://localhost:3000/file/1746884118488-SCRAPER VIP .zip"
+  }
+]
